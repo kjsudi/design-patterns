@@ -2,14 +2,38 @@ package com.kjsudi.java.designpatterns.strategy;
 
 public class GoogleSearchEngine implements ISearchEngine {
 	
-	public GoogleSearchEngine() {
-		System.out.println("Using Google search engine");
+	private String name;
+	private Mode mode;
+	
+	public GoogleSearchEngine(String name) {
+		setNameAndMode(name);
 	}
-
+	
 	public String searchFor(String userInput) {
-		String output = "We found: <Response from Google> for your input: " + userInput; 
+		
+		System.out.println("Using " + getName() +  " search engine in " + this.mode.getName() + " mode");
+		
+		String output;
+		if(this.mode == Mode.ADV) {
+		 output = "We found: <Complex processed response> for your input: " + userInput;
+		}
+		else {
+			output = "We found: <Response> for your input: " + userInput;
+		}
 		return output;
 	}
 	
+	private void setNameAndMode(String name) {
+		this.name = "[" + name  + "]";
+		this.mode = Mode.NORMAL;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+
+	public void setAdvancedMode() {
+		this.mode = Mode.ADV;
+	}
 
 }
